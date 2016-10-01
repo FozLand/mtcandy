@@ -382,15 +382,14 @@ minetest.register_node("mtcandy:spiral_yellow", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-
 -----------------------------
 --recipe for spiral candies--
 -----------------------------
 
 minetest.register_craft({
-	output = "mtcandy:spiral_blue",
+	output = "mtcandy:spiral_blue 2",
 	recipe = {
-		{"dye:cyan", "", "dye:blue 2"},
+		{"dye:cyan", "", "dye:blue"},
 		{"", "mtcandy:caramel", ""},
 		{"", "mtcandy:caramel", ""},
 	}
