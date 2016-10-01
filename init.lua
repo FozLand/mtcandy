@@ -77,7 +77,6 @@ minetest.register_craft({
 --register rectangular candies--
 --------------------------------
 
-
 minetest.register_node("mtcandy:candyrec_bluecyan", {
 	description = "Candyrec Blue",
 	tiles = {"mtcandy_candyrec_bluecyan.png"},
@@ -105,8 +104,6 @@ minetest.register_node("mtcandy:candyrec_yellow", {
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
-
 
 ----------------------------------
 --recipe for rectangular candies--
@@ -194,7 +191,6 @@ minetest.register_node("mtcandy:dotted_yellow", {
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 
 -----------------------------
 --recipe for dotted candies--
@@ -299,7 +295,6 @@ minetest.register_node("mtcandy:peppermint_yellow_top", {
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 
 --------------------------
 --recipe for peppermints--
@@ -466,7 +461,6 @@ minetest.register_node("mtcandy:striped_lime_green", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-
 -----------------------------
 --recipe for stiped candies--
 -----------------------------
@@ -535,7 +529,6 @@ minetest.register_node("mtcandy:white_choco", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-
 --------------------------------
 --recipe for chocolate candies--
 --------------------------------
@@ -594,6 +587,7 @@ minetest.register_node("mtcandy:heart_candy", {
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node("mtcandy:emenems", {
 	description = "m & m",
 	tiles = {"mtcandy_emenems.png"},
@@ -601,7 +595,6 @@ minetest.register_node("mtcandy:emenems", {
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 
 -------------------------------
 --recipes for special candies--
