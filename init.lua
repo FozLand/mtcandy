@@ -636,29 +636,3 @@ minetest.register_craft({
 		{"mtcandy:caramel", "default:torch", "dye:magenta"},
 	}
 })
-
--- won't work with upstream moreblocks
-if core.get_modpath( 'moreblocks' ) ~= nil and stairsplus.register_nodes then
-	local nodes = {
-		'candyrec_bluecyan',
-		'candyrec_magenta',
-		'candyrec_orange',
-		'candyrec_yellow',
-		'dotted_green',
-		'dotted_orange',
-		'dotted_pink',
-		'dotted_red',
-		'dotted_yellow',
-		'striped_lime_green',
-		'striped_purple_green',
-		'striped_pink_yellow',
-		'striped_pink_white',
-		'striped_pink_brown',
-		'milk_choco',
-		'white_choco',
-		'crosscandy',
-		'daisy',
-		'orange'
-	}
-	stairsplus.register_nodes ( 'mtcandy', nodes )
-end
