@@ -1,638 +1,567 @@
---Candy by Ratmonkey--
-
-
-------------------------
---register sugar block--
-------------------------
-
-minetest.register_node("mtcandy:sugar_block", {
-	description = "Sugarblock",
-	tiles = {"mtcandy_sugar_block.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
---------------------------
---recipe for sugar block--
---------------------------
-
-minetest.register_craft({
-	output = "mtcandy:sugar_block",
-	recipe = {
-		{"mtfoods:sugar" ,"mtfoods:sugar" ,"mtfoods:sugar"}, 
-		{"mtfoods:sugar" ,"mtfoods:sugar" ,"mtfoods:sugar"}, 
-		{"mtfoods:sugar" ,"mtfoods:sugar" ,"mtfoods:sugar"}
-	}
-})
-
-
---------------------
---register caramel--
---------------------
-
-minetest.register_node("mtcandy:caramel", {
-	description = "Caramel",
-	tiles = {"mtcandy_caramel.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-----------------------
---recipe for caramel--
-----------------------
-
-minetest.register_craft({
-	type = "cooking",
-	output = "mtcandy:caramel",
-	recipe = "mtcandy:sugar_block",
-})
-
-
 -----------------------
---register crosscandy--
+-- block definitions --
 -----------------------
 
-minetest.register_node("mtcandy:crosscandy", {
-	description = "Crosscandy",
-	tiles = {"mtcandy_crosscandy.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+local candy = {}
 
--------------------------
---recipe for crosscandy--
--------------------------
+candy['sugar_block'] = {
+	description = 'Sugarblock',
+	tiles = {'mtcandy_sugar_block.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:crosscandy 2",
-	recipe = {
-		{"dye:magenta", "mtcandy:caramel", "dye:magenta"},
-		{"", "mtcandy:caramel", ""},
-		{"", "", ""},
-	}
-})
+candy['caramel'] = {
+	description = 'Caramel',
+	tiles = {'mtcandy_caramel.png'},
+}
 
+candy['crosscandy'] = {
+	description = 'Rose Candy',
+	tiles = {'mtcandy_crosscandy.png'},
+}
 
---------------------------------
---register rectangular candies--
---------------------------------
+candy['candyrec_bluecyan'] = {
+	description = 'Blue Taffy',
+	tiles = {'mtcandy_candyrec_bluecyan.png'},
+}
 
-minetest.register_node("mtcandy:candyrec_bluecyan", {
-	description = "Candyrec Blue",
-	tiles = {"mtcandy_candyrec_bluecyan.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['candyrec_magenta'] = {
+	description = 'Purple Taffy',
+	tiles = {'mtcandy_candyrec_magenta.png'},
+}
 
-minetest.register_node("mtcandy:candyrec_magenta", {
-	description = "Candyrec Magenta",
-	tiles = {"mtcandy_candyrec_magenta.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['candyrec_orange'] = {
+	description = 'Orange Taffy',
+	tiles = {'mtcandy_candyrec_orange.png'},
+}
 
-minetest.register_node("mtcandy:candyrec_orange", {
-	description = "Candyrec Orange",
-	tiles = {"mtcandy_candyrec_orange.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['candyrec_yellow'] = {
+	description = 'Yellow Taffy',
+	tiles = {'mtcandy_candyrec_yellow.png'},
+}
 
-minetest.register_node("mtcandy:candyrec_yellow", {
-	description = "Candyrec Yellow",
-	tiles = {"mtcandy_candyrec_yellow.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['dotted_green'] = {
+	description = 'Sour Lime Candy',
+	tiles = {'mtcandy_dotted_green.png'},
+}
 
-----------------------------------
---recipe for rectangular candies--
-----------------------------------
+candy['dotted_red'] = {
+	description = 'Sour Cherry Candy',
+	tiles = {'mtcandy_dotted_red.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:candyrec_bluecyan 2",
-	recipe = {
-		{"mtcandy:caramel", "dye:cyan", ""},
-		{"dye:blue", "mtcandy:caramel", ""},
-		{"", "", ""},
-	}
-})
+candy['dotted_pink'] = {
+	description = 'Sour Grape Candy',
+	tiles = {'mtcandy_dotted_pink.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:candyrec_magenta 2",
-	recipe = {
-		{"mtcandy:caramel", "dye:magenta", ""},
-		{"dye:red", "mtcandy:caramel", ""},
-		{"", "", ""},
-	}
-})
+candy['dotted_orange'] = {
+	description = 'Sour Orange Candy',
+	tiles = {'mtcandy_dotted_orange.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:candyrec_orange 2",
-	recipe = {
-		{"mtcandy:caramel", "dye:orange", ""},
-		{"dye:red", "mtcandy:caramel", ""},
-		{"", "", ""},
-	}
-})
+candy['dotted_yellow'] = {
+	description = 'Sour Lemon Candy',
+	tiles = {'mtcandy_dotted_yellow.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:candyrec_yellow 2",
-	recipe = {
-		{"mtcandy:caramel", "dye:yellow", ""},
-		{"dye:white", "mtcandy:caramel", ""},
-		{"", "", ""},
-	}
-})
+candy['peppermint'] = {
+	description = 'Peppermint Candy',
+	tiles = {
+		'mtcandy_peppermint_top.png',
+		'mtcandy_peppermint_top.png',
+		'mtcandy_peppermint_side.png'
+	},
+}
 
+candy['peppermint_red'] = {
+	description = 'Peppermint Red Candy',
+	tiles = {
+		'mtcandy_peppermint_red.png',
+		'mtcandy_peppermint_red_bott.png',
+		'mtcandy_peppermint_red_side.png'
+	},
+}
 
----------------------------
---register dotted candies--
----------------------------
+candy['peppermint_cyan_top'] = {
+	description = 'Peppermint Cyan Candy',
+	tiles = {
+		'mtcandy_peppermint_cyan_top.png',
+		'mtcandy_peppermint_cyan_bott.png',
+		'mtcandy_peppermint_cyan_side.png'
+	},
+}
 
-minetest.register_node("mtcandy:dotted_green", {
-	description = "Dotted Green",
-	tiles = {"mtcandy_dotted_green.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['peppermint_green_top'] = {
+	description = 'Peppermint Green Candy',
+	tiles = {
+		'mtcandy_peppermint_green_top.png',
+		'mtcandy_peppermint_green_bott.png',
+		'mtcandy_peppermint_green_side.png'
+	},
+}
 
-minetest.register_node("mtcandy:dotted_red", {
-	description = "Dotted Red",
-	tiles = {"mtcandy_dotted_red.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['peppermint_magenta_top'] = {
+	description = 'Peppermint Magenta Candy',
+	tiles = {
+		'mtcandy_peppermint_magenta_top.png',
+		'mtcandy_peppermint_magenta_bott.png',
+		'mtcandy_peppermint_magenta_side.png'
+	},
+}
 
-minetest.register_node("mtcandy:dotted_pink", {
-	description = "Dotted Pink",
-	tiles = {"mtcandy_dotted_pink.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['peppermint_orange_top'] = {
+	description = 'Peppermint Orange Candy',
+	tiles = {
+		'mtcandy_peppermint_orange_top.png',
+		'mtcandy_peppermint_orange_bott.png',
+		'mtcandy_peppermint_orange_side.png'
+	},
+}
 
-minetest.register_node("mtcandy:dotted_orange", {
-	description = "Dotted Orange",
-	tiles = {"mtcandy_dotted_orange.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['peppermint_yellow_top'] = {
+	description = 'Peppermint Yellow Candy',
+	tiles = {
+		'mtcandy_peppermint_yellow_top.png',
+		'mtcandy_peppermint_yellow_bott.png',
+		'mtcandy_peppermint_yellow_side.png'
+	},
+}
 
-minetest.register_node("mtcandy:dotted_yellow", {
-	description = "Dotted Yellow",
-	tiles = {"mtcandy_dotted_yellow.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['spiral_blue'] = {
+	description = 'Blue Berry Spiral Candy',
+	tiles = {'mtcandy_spiral_blue.png'},
+}
 
------------------------------
---recipe for dotted candies--
------------------------------
+candy['spiral_purple'] = {
+	description = 'Mixed Berry Spiral Candy',
+	tiles = {'mtcandy_spiral_purple.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:dotted_green 2",
-	recipe = {
-		{"", "dye:white", ""},
-		{"mtcandy:caramel", "", "mtcandy:caramel"},
-		{"", "dye:green", ""},
-	}
-})
+candy['spiral_yellow'] = {
+	description = 'Lemon Lime Spiral Candy',
+	tiles = {'mtcandy_spiral_yellow.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:dotted_red 2",
-	recipe = {
-		{"", "dye:white", ""},
-		{"mtcandy:caramel", "", "mtcandy:caramel"},
-		{"", "dye:red", ""},
-	}
-})
+candy['striped_pink_brown'] = {
+	description = 'Pink Brown Licorice',
+	tiles = {'mtcandy_striped_pink_brown.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:dotted_pink 2",
-	recipe = {
-		{"", "dye:white", ""},
-		{"mtcandy:caramel", "", "mtcandy:caramel"},
-		{"", "dye:pink", ""},
-	}
-})
+candy['striped_pink_white'] = {
+	description = 'Pink White Licorice',
+	tiles = {'mtcandy_striped_pink_white.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:dotted_orange 2",
-	recipe = {
-		{"", "dye:white", ""},
-		{"mtcandy:caramel", "", "mtcandy:caramel"},
-		{"", "dye:orange", ""},
-	}
-})
+candy['striped_pink_yellow'] = {
+	description = 'Pink Yellow Licorice',
+	tiles = {'mtcandy_striped_pink_yellow.png'},
+}
 
-minetest.register_craft({
-	output = "mtcandy:dotted_yellow 2",
-	recipe = {
-		{"", "dye:white", ""},
-		{"mtcandy:caramel", "", "mtcandy:caramel"},
-		{"", "dye:yellow", ""},
-	}
-})
+candy['striped_purple_green'] = {
+	description = 'Purple Green Licorice',
+	tiles = {'mtcandy_striped_purple_green.png'},
+}
 
+candy['striped_lime_green'] = {
+	description = 'Lime Green Licorice',
+	tiles = {'mtcandy_striped_lime_green.png'},
+}
 
-------------------------
---register peppermints--
-------------------------
+candy['milk_choco'] = {
+	description = 'Milk Chocolate',
+	tiles = {'mtcandy_milk_choco.png'},
+}
 
-minetest.register_node("mtcandy:peppermint", {
-	description = "Peppermint",
-	tiles = {"mtcandy_peppermint_top.png", "mtcandy_peppermint_top.png", "mtcandy_peppermint_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['white_choco'] = {
+	description = 'White Chocolate',
+	tiles = {'mtcandy_white_choco.png'},
+}
 
+candy['orange'] = {
+	description = 'Orange Crush Candy',
+	tiles = {'mtcandy_orange.png'},
+	light_source = 10,
+}
 
-minetest.register_node("mtcandy:peppermint_red", {
-	description = "Peppermint Red",
-	tiles = {"mtcandy_peppermint_red.png", "mtcandy_peppermint_red_bott.png", "mtcandy_peppermint_red_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['pcorn_side'] = {
+	description = 'Popcorn Bucket',
+	tiles = {
+		'mtcandy_pcorn_top.png',
+		'mtcandy_pcorn_bott.png',
+		'mtcandy_pcorn_side.png'
+	},
+	light_source = 10,
+	groups = {snappy=3,oddly_breakable_by_hand=3,flammable=3},
+}
 
-minetest.register_node("mtcandy:peppermint_cyan_top", {
-	description = "Peppermint Cyan",
-	tiles = {"mtcandy_peppermint_cyan_top.png", "mtcandy_peppermint_cyan_bott.png", "mtcandy_peppermint_cyan_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['daisy'] = {
+	description = 'Daisy Candy',
+	tiles = {'mtcandy_daisy.png'},
+	light_source = 10,
+}
 
-minetest.register_node("mtcandy:peppermint_green_top", {
-	description = "Peppermint Green",
-	tiles = {"mtcandy_peppermint_green_top.png", "mtcandy_peppermint_green_bott.png", "mtcandy_peppermint_green_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['heart_candy'] = {
+	description = 'Be Mine Candy',
+	tiles = {'mtcandy_heart_candy.png'},
+	light_source = 10,
+}
 
-minetest.register_node("mtcandy:peppermint_magenta_top", {
-	description = "Peppermint Magenta",
-	tiles = {"mtcandy_peppermint_magenta_top.png", "mtcandy_peppermint_magenta_bott.png", "mtcandy_peppermint_magenta_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+candy['emenems'] = {
+	description = 'M&M\'s',
+	tiles = {'mtcandy_emenems.png'},
+	light_source = 10,
+}
 
-minetest.register_node("mtcandy:peppermint_orange_top", {
-	description = "Peppermint Orange",
-	tiles = {"mtcandy_peppermint_orange_top.png", "mtcandy_peppermint_orange_bott.png", "mtcandy_peppermint_orange_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+local mod = minetest.get_current_modname()
 
-minetest.register_node("mtcandy:peppermint_yellow_top", {
-	description = "Peppermint Yellow",
-	tiles = {"mtcandy_peppermint_yellow_top.png", "mtcandy_peppermint_yellow_bott.png", "mtcandy_peppermint_yellow_side.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
+local stairs = false
+if core.global_exists('stairsplus') then stairs = true end
 
---------------------------
---recipe for peppermints--
---------------------------
+for name,def in pairs(candy) do
+	local nodename = mod..':'..name
+
+	if not def.groups then
+		def.groups = {cracky=3,snappy=3,oddly_breakable_by_hand=2}
+	end
+	def.default_sounds = default.node_sound_stone_defaults()
+	def.on_use = minetest.item_eat(1.5)
+
+	minetest.register_node(nodename, def)
+
+	if stairs then stairsplus:register_all(mod, name, nodename, def) end
+end
+
+-------------
+-- recipes --
+-------------
 
 minetest.register_craft({
-	output = "mtcandy:peppermint 3",
-	recipe = {
-		{"", "dye:magenta", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:white", "", "dye:white"},
-	}
+	type = 'cooking',
+	output = 'mtcandy:caramel',
+	recipe = 'mtcandy:sugar_block',
 })
 
 minetest.register_craft({
-	output = "mtcandy:peppermint_red 3",
+	output = 'mtcandy:sugar_block',
 	recipe = {
-		{"", "dye:white", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:red", "", "dye:red"},
+		{'mtfoods:sugar' ,'mtfoods:sugar' ,'mtfoods:sugar'},
+		{'mtfoods:sugar' ,'mtfoods:sugar' ,'mtfoods:sugar'},
+		{'mtfoods:sugar' ,'mtfoods:sugar' ,'mtfoods:sugar'}
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:peppermint_cyan_top 3",
+	output = 'mtcandy:crosscandy 2',
 	recipe = {
-		{"", "dye:yellow", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:cyan", "", "dye:cyan"},
+		{'dye:magenta', 'mtcandy:caramel', 'dye:magenta'},
+		{'',            'mtcandy:caramel', ''           },
+		{'', '', ''},
+	}
+})
+
+-------------------------------------
+-- recipes for rectangular candies --
+-------------------------------------
+
+minetest.register_craft({
+	output = 'mtcandy:candyrec_bluecyan 2',
+	recipe = {
+		{'mtcandy:caramel', 'dye:cyan',        ''},
+		{'dye:blue',        'mtcandy:caramel', ''},
+		{'', '', ''},
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:peppermint_green_top 3",
+	output = 'mtcandy:candyrec_magenta 2',
 	recipe = {
-		{"", "dye:magenta", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:green", "", "dye:green"},
+		{'mtcandy:caramel', 'dye:magenta',     ''},
+		{'dye:red',         'mtcandy:caramel', ''},
+		{'', '', ''},
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:peppermint_magenta_top 3",
+	output = 'mtcandy:candyrec_orange 2',
 	recipe = {
-		{"", "dye:blue", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:magenta", "", "dye:magenta"},
+		{'mtcandy:caramel', 'dye:orange',      ''},
+		{'dye:red',         'mtcandy:caramel', ''},
+		{'', '', ''},
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:peppermint_orange_top 3",
+	output = 'mtcandy:candyrec_yellow 2',
 	recipe = {
-		{"", "dye:violet", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:orange", "", "dye:orange"},
+		{'mtcandy:caramel', 'dye:yellow',      ''},
+		{'dye:white',       'mtcandy:caramel', ''},
+		{'', '', ''},
 	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:peppermint_yellow_top 3",
-	recipe = {
-		{"", "dye:magenta", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"dye:yellow", "", "dye:yellow"},
-	}
-})
-
-
----------------------------
---register spiral candies--
----------------------------
-
-minetest.register_node("mtcandy:spiral_blue", {
-	description = "Spiral Blue",
-	tiles = {"mtcandy_spiral_blue.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:spiral_purple", {
-	description = "Spiral Purple",
-	tiles = {"mtcandy_spiral_purple.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:spiral_yellow", {
-	description = "Spiral Yellow",
-	tiles = {"mtcandy_spiral_yellow.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
------------------------------
---recipe for spiral candies--
------------------------------
-
-minetest.register_craft({
-	output = "mtcandy:spiral_blue 2",
-	recipe = {
-		{"dye:cyan", "", "dye:blue"},
-		{"", "mtcandy:caramel", ""},
-		{"", "mtcandy:caramel", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:spiral_purple 2",
-	recipe = {
-		{"dye:violet", "", "dye:pink"},
-		{"", "mtcandy:caramel", ""},
-		{"", "mtcandy:caramel", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:spiral_yellow 2",
-	recipe = {
-		{"dye:yellow", "", "dye:green"},
-		{"", "mtcandy:caramel", ""},
-		{"", "mtcandy:caramel", ""},
-	}
-})
-
-
----------------------------
---register stiped candies--
----------------------------
-
-minetest.register_node("mtcandy:striped_pink_brown", {
-	description = "Striped Pink Brown",
-	tiles = {"mtcandy_striped_pink_brown.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:striped_pink_white", {
-	description = "Striped Pink White",
-	tiles = {"mtcandy_striped_pink_white.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:striped_pink_yellow", {
-	description = "Striped Pink Yellow",
-	tiles = {"mtcandy_striped_pink_yellow.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:striped_purple_green", {
-	description = "Striped Purple Green",
-	tiles = {"mtcandy_striped_purple_green.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:striped_lime_green", {
-	description = "Striped Lime Green",
-	tiles = {"mtcandy_striped_lime_green.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
------------------------------
---recipe for stiped candies--
------------------------------
-
-minetest.register_craft({
-	output = "mtcandy:striped_pink_brown 3",
-	recipe = {
-		{"dye:brown", "dye:pink", "dye:brown"},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"", "", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:striped_pink_white 3",
-	recipe = {
-		{"dye:white", "dye:pink", "dye:white"},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"", "", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:striped_pink_yellow 3",
-	recipe = {
-		{"dye:yellow", "dye:pink", "dye:yellow"},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"", "", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:striped_purple_green 3",
-	recipe = {
-		{"dye:cyan", "dye:green", "dye:cyan"},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"", "", ""},
-	}
-})
-
-minetest.register_craft({
-	output = "mtcandy:striped_lime_green 3",
-	recipe = {
-		{"dye:green", "dye:white", "dye:green"},
-		{"mtcandy:caramel", "mtcandy:caramel", "mtcandy:caramel"},
-		{"", "", ""},
-	}
-})
-
-
-------------------------------
---register chocolate candies--
-------------------------------
-
-minetest.register_node("mtcandy:milk_choco", {
-	description = "Milk Chocolate",
-	tiles = {"mtcandy_milk_choco.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:white_choco", {
-	description = "White Chocolate",
-	tiles = {"mtcandy_white_choco.png"},
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
 })
 
 --------------------------------
---recipe for chocolate candies--
+-- recipes for dotted candies --
 --------------------------------
 
 minetest.register_craft({
-	output = "mtcandy:milk_choco 2",
+	output = 'mtcandy:dotted_green 2',
 	recipe = {
-		{"mtfoods:chocolate", "mtfoods:chocolate", ""},
-		{"mtcandy:caramel", "mtcandy:caramel", ""},
-		{"", "", ""},
+		{'',                'dye:white', ''               },
+		{'mtcandy:caramel', '',          'mtcandy:caramel'},
+		{'',                'dye:green', ''               },
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:white_choco 2",
+	output = 'mtcandy:dotted_red 2',
 	recipe = {
-		{"mtfoods:cream", "dye:white", ""},
-		{"mtcandy:milk_choco", "mtcandy:milk_choco", ""},
-		{"", "", ""},
-	}
-})
-
-
-----------------------------
---register special candies--
-----------------------------
-
-minetest.register_node("mtcandy:orange", {
-	description = "orange",
-	tiles = {"mtcandy_orange.png"},
-	light_source = 10,
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:pcorn_side", {
-	description = "Popcorn Bucket",
-	tiles = {"mtcandy_pcorn_top.png", "mtcandy_pcorn_bott.png", "mtcandy_pcorn_side.png"},
-	light_source = 10,
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:daisy", {
-	description = "daisy",
-	tiles = {"mtcandy_daisy.png"},
-	light_source = 10,
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:heart_candy", {
-	description = "Heart Candy",
-	tiles = {"mtcandy_heart_candy.png"},
-	light_source = 10,
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("mtcandy:emenems", {
-	description = "m & m",
-	tiles = {"mtcandy_emenems.png"},
-	light_source = 10,
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
--------------------------------
---recipes for special candies--
--------------------------------
-
-minetest.register_craft({
-	output = "mtcandy:orange 3",
-	recipe = {
-		{"mtcandy:caramel", "default:torch", "dye:orange"},
-		{"dye:yellow", "default:torch", "mtcandy:caramel"},
-		{"mtcandy:caramel", "default:torch", "dye:orange"},
+		{'',                'dye:white', ''               },
+		{'mtcandy:caramel', '',          'mtcandy:caramel'},
+		{'',                'dye:red',   ''               },
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:pcorn_side 3",
+	output = 'mtcandy:dotted_pink 2',
 	recipe = {
-		{"mtcandy:caramel", "default:torch", "dye:red"},
-		{"dye:yellow", "default:torch", "mtcandy:caramel"},
-		{"mtcandy:caramel", "default:torch", "dye:white"},
+		{'',                'dye:white', ''               },
+		{'mtcandy:caramel', '',          'mtcandy:caramel'},
+		{'',                'dye:pink',  ''               },
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:daisy 3",
+	output = 'mtcandy:dotted_orange 2',
 	recipe = {
-		{"mtcandy:caramel", "default:torch", "dye:yellow"},
-		{"dye:violet", "default:torch", "mtcandy:caramel"},
-		{"mtcandy:caramel", "default:torch", "dye:white"},
+		{'',                'dye:white',  ''               },
+		{'mtcandy:caramel', '',           'mtcandy:caramel'},
+		{'',                'dye:orange', ''               },
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:heart_candy 3",
+	output = 'mtcandy:dotted_yellow 2',
 	recipe = {
-		{"mtcandy:caramel", "default:torch", "dye:red"},
-		{"dye:yellow", "default:torch", "mtcandy:caramel"},
-		{"mtcandy:caramel", "default:torch", "dye:orange"},
+		{'',                'dye:white',  ''               },
+		{'mtcandy:caramel', '',           'mtcandy:caramel'},
+		{'',                'dye:yellow', ''               },
+	}
+})
+
+-----------------------------
+-- recipes for peppermints --
+-----------------------------
+
+minetest.register_craft({
+	output = 'mtcandy:peppermint 3',
+	recipe = {
+		{'',                'dye:magenta',     ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:white',       '',                'dye:white'      },
 	}
 })
 
 minetest.register_craft({
-	output = "mtcandy:emenems 3",
+	output = 'mtcandy:peppermint_red 3',
 	recipe = {
-		{"mtcandy:caramel", "default:torch", "dye:yellow"},
-		{"dye:brown", "default:torch", "mtcandy:caramel"},
-		{"mtcandy:caramel", "default:torch", "dye:magenta"},
+		{'',                'dye:white',       ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:red',         '',                'dye:red'        },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:peppermint_cyan_top 3',
+	recipe = {
+		{'',                'dye:yellow',      ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:cyan',        '',                'dye:cyan'       },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:peppermint_green_top 3',
+	recipe = {
+		{'',                'dye:magenta',     ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:green',       '',                'dye:green'      },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:peppermint_magenta_top 3',
+	recipe = {
+		{'',                'dye:blue',        ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:magenta',     '',                'dye:magenta'    },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:peppermint_orange_top 3',
+	recipe = {
+		{'',                'dye:violet',      ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:orange',      '',                'dye:orange'     },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:peppermint_yellow_top 3',
+	recipe = {
+		{'',                'dye:magenta',     ''               },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'dye:yellow',      '',                'dye:yellow'     },
+	}
+})
+
+--------------------------------
+-- recipes for spiral candies --
+--------------------------------
+
+minetest.register_craft({
+	output = 'mtcandy:spiral_blue 2',
+	recipe = {
+		{'dye:cyan', '',                'dye:blue'},
+		{'',         'mtcandy:caramel', ''        },
+		{'',         'mtcandy:caramel', ''        },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:spiral_purple 2',
+	recipe = {
+		{'dye:violet', '',                'dye:pink'},
+		{'',           'mtcandy:caramel', ''        },
+		{'',           'mtcandy:caramel', ''        },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:spiral_yellow 2',
+	recipe = {
+		{'dye:yellow', '',                'dye:green'},
+		{'',           'mtcandy:caramel', ''         },
+		{'',           'mtcandy:caramel', ''         },
+	}
+})
+
+--------------------------------
+-- recipes for stiped candies --
+--------------------------------
+
+minetest.register_craft({
+	output = 'mtcandy:striped_pink_brown 3',
+	recipe = {
+		{'dye:brown',       'dye:pink',        'dye:brown'      },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:striped_pink_white 3',
+	recipe = {
+		{'dye:white',       'dye:pink',        'dye:white'      },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:striped_pink_yellow 3',
+	recipe = {
+		{'dye:yellow',      'dye:pink',        'dye:yellow'     },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:striped_purple_green 3',
+	recipe = {
+		{'dye:cyan',        'dye:green',       'dye:cyan'       },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:striped_lime_green 3',
+	recipe = {
+		{'dye:green',       'dye:white',       'dye:green'      },
+		{'mtcandy:caramel', 'mtcandy:caramel', 'mtcandy:caramel'},
+		{'', '', ''},
+	}
+})
+
+-----------------------------------
+-- recipes for chocolate candies --
+-----------------------------------
+
+minetest.register_craft({
+	output = 'mtcandy:milk_choco 2',
+	recipe = {
+		{'mtfoods:chocolate', 'mtfoods:chocolate', ''},
+		{'mtcandy:caramel',   'mtcandy:caramel',   ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:white_choco 2',
+	recipe = {
+		{'mtfoods:cream',      'dye:white',          ''},
+		{'mtcandy:milk_choco', 'mtcandy:milk_choco', ''},
+		{'', '', ''},
+	}
+})
+
+---------------------------------
+-- recipes for special candies --
+---------------------------------
+
+minetest.register_craft({
+	output = 'mtcandy:orange 3',
+	recipe = {
+		{'mtcandy:caramel', 'default:torch', 'dye:orange'     },
+		{'dye:yellow',      'default:torch', 'mtcandy:caramel'},
+		{'mtcandy:caramel', 'default:torch', 'dye:orange'     },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:pcorn_side 3',
+	recipe = {
+		{'mtcandy:caramel', 'default:torch', 'dye:red'        },
+		{'dye:yellow',      'default:torch', 'mtcandy:caramel'},
+		{'mtcandy:caramel', 'default:torch', 'dye:white'      },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:daisy 3',
+	recipe = {
+		{'mtcandy:caramel', 'default:torch', 'dye:yellow'     },
+		{'dye:violet',      'default:torch', 'mtcandy:caramel'},
+		{'mtcandy:caramel', 'default:torch', 'dye:white'      },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:heart_candy 3',
+	recipe = {
+		{'mtcandy:caramel', 'default:torch', 'dye:red'        },
+		{'dye:yellow',      'default:torch', 'mtcandy:caramel'},
+		{'mtcandy:caramel', 'default:torch', 'dye:orange'     },
+	}
+})
+
+minetest.register_craft({
+	output = 'mtcandy:emenems 3',
+	recipe = {
+		{'mtcandy:caramel', 'default:torch', 'dye:yellow'     },
+		{'dye:brown',       'default:torch', 'mtcandy:caramel'},
+		{'mtcandy:caramel', 'default:torch', 'dye:magenta'    },
 	}
 })
