@@ -530,6 +530,9 @@ minetest.register_craft({
 		{'mtfoods:cream',      'dye:white',          ''},
 		{'mtcandy:milk_choco', 'mtcandy:milk_choco', ''},
 		{'', '', ''},
+	},
+	replacements = {
+		{'mtfoods:cream', 'vessels:drinking_glass'},
 	}
 })
 
